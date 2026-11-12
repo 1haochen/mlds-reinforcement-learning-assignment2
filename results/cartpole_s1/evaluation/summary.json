@@ -1,0 +1,16 @@
+{
+  "checkpoint": "results/cartpole_s1/best.pt",
+  "checkpoint_episode": 560,
+  "n": 500,
+  "mean": 497.34,
+  "std": 34.273046018215744,
+  "min": 52.0,
+  "max": 500.0,
+  "median": 500.0,
+  "epsilon": 0.0,
+  "seeds": [
+    100000,
+    100499
+  ],
+  "fraction_500": 0.994
+}

@@ -1,0 +1,148 @@
+{
+ "checkpoint_episode": 560,
+ "epsilon_noise": {
+  "0.0": {
+   "mean": 500.0,
+   "std": 0.0,
+   "fraction_500": 1.0
+  },
+  "0.05": {
+   "mean": 406.78,
+   "std": 186.73701186427934,
+   "fraction_500": 0.8
+  },
+  "0.1": {
+   "mean": 303.48,
+   "std": 231.34560639873843,
+   "fraction_500": 0.58
+  },
+  "0.25": {
+   "mean": 97.53,
+   "std": 153.6934907535124,
+   "fraction_500": 0.12
+  },
+  "0.5": {
+   "mean": 26.5,
+   "std": 28.14551474036316,
+   "fraction_500": 0.0
+  },
+  "1.0": {
+   "mean": 22.01,
+   "std": 12.80897732061385,
+   "fraction_500": 0.0
+  }
+ },
+ "physics": [
+  {
+   "param": "length",
+   "value": 0.25,
+   "mean": 322.8,
+   "std": 224.1891165957884
+  },
+  {
+   "param": "length",
+   "value": 0.5,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "length",
+   "value": 1.0,
+   "mean": 70.26666666666667,
+   "std": 9.330713918142719
+  },
+  {
+   "param": "length",
+   "value": 2.0,
+   "mean": 107.36666666666666,
+   "std": 37.264355921204675
+  },
+  {
+   "param": "masspole",
+   "value": 0.05,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "masspole",
+   "value": 0.1,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "masspole",
+   "value": 0.5,
+   "mean": 421.1,
+   "std": 165.03663229719635
+  },
+  {
+   "param": "masspole",
+   "value": 1.0,
+   "mean": 160.9,
+   "std": 205.29902581356788
+  },
+  {
+   "param": "force_mag",
+   "value": 5.0,
+   "mean": 19.6,
+   "std": 11.537186254311173
+  },
+  {
+   "param": "force_mag",
+   "value": 10.0,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "force_mag",
+   "value": 15.0,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "force_mag",
+   "value": 20.0,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "gravity",
+   "value": 4.9,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "gravity",
+   "value": 9.8,
+   "mean": 500.0,
+   "std": 0.0
+  },
+  {
+   "param": "gravity",
+   "value": 14.7,
+   "mean": 350.26666666666665,
+   "std": 203.44449420473939
+  },
+  {
+   "param": "gravity",
+   "value": 19.6,
+   "mean": 100.23333333333333,
+   "std": 134.12001673459818
+  }
+ ],
+ "mirror_symmetry_uniform_box": {
+  "action_flip_rate_confident_states": 0.5646450519561768,
+  "n_confident_states": 4254,
+  "mean_abs_value_asymmetry": 2.1605968475341797
+ },
+ "mirror_symmetry_visited": {
+  "action_flip_rate_confident_states": 0.5716776847839355,
+  "n_confident_states": 2867,
+  "n_states": 5000,
+  "mean_abs_value_asymmetry": 1.2297698259353638
+ },
+ "qmax_vs_theory": {
+  "theory_never_terminating": 19.999999999999982,
+  "mean_qmax_at_start_states": 20.011003494262695
+ }
+}

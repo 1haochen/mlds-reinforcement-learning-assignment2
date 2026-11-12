@@ -1,0 +1,16 @@
+__pycache__/
+.venv/
+.DS_Store
+*.log
+*.pem
+*.key
+*passkey*
+*password*
+*credential*
+.env
+results/**/last.pt
+old_attempt/
+report_body_*.md
+*.pid
+report_full.md
+logs/

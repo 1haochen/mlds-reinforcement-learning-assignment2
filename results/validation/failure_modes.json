@@ -1,0 +1,50 @@
+[
+ {
+  "checkpoint": "results/cartpole_s0/best.pt",
+  "episode": 180,
+  "mean_length": 297.9,
+  "pole_angle": 20,
+  "cart_x": 0,
+  "truncated": 0
+ },
+ {
+  "checkpoint": "results/cartpole_s1/best.pt",
+  "episode": 560,
+  "mean_length": 500.0,
+  "pole_angle": 0,
+  "cart_x": 0,
+  "truncated": 20
+ },
+ {
+  "checkpoint": "results/cartpole_s2/best.pt",
+  "episode": 110,
+  "mean_length": 415.0,
+  "pole_angle": 19,
+  "cart_x": 0,
+  "truncated": 1
+ },
+ {
+  "checkpoint": "results/cartpole_s0/last.pt",
+  "episode": 600,
+  "mean_length": 224.05,
+  "pole_angle": 4,
+  "cart_x": 16,
+  "truncated": 0
+ },
+ {
+  "checkpoint": "results/cartpole_s1/last.pt",
+  "episode": 600,
+  "mean_length": 91.15,
+  "pole_angle": 1,
+  "cart_x": 19,
+  "truncated": 0
+ },
+ {
+  "checkpoint": "results/cartpole_s2/last.pt",
+  "episode": 600,
+  "mean_length": 285.55,
+  "pole_angle": 1,
+  "cart_x": 16,
+  "truncated": 3
+ }
+]
