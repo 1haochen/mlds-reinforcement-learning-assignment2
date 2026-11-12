@@ -1,0 +1,15 @@
+{
+  "checkpoint": "results/mspacman/best.pt",
+  "checkpoint_episode": 4300,
+  "n": 500,
+  "mean": 1664.84,
+  "std": 497.083855217846,
+  "min": 900.0,
+  "max": 4570.0,
+  "median": 1570.0,
+  "epsilon": 0.0,
+  "seeds": [
+    100000,
+    100499
+  ]
+}

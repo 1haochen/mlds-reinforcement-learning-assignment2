@@ -96,7 +96,7 @@ def histogram(run, out, name):
     ax.axvline(s.mean(), color=ORANGE, ls='--', label=f'mean = {s.mean():.1f}, std = {s.std(ddof=1):.1f}')
     ax.set(xlabel='Episode reward', ylabel='Number of episodes' + (' (log scale)' if 'Cart' in name else ''),
            title=f'{name}: {len(s)} evaluation episodes with the trained greedy policy')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper center' if 'Cart' in name else 'upper right')
     save(fig, out / f'{name.split("-")[0].lower()}_histogram.png')
 
 
@@ -165,14 +165,21 @@ def ablations(out):
     save(fig, out / 'cartpole_ablation.png')
 
     runs = {'Main (target network)': ('results/mspacman', BLUE), 'No target network': ('results/mspacman_notarget', RED)}
-    fig, ax = plt.subplots(figsize=(7.5, 3.4))
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(11, 3.4))
     for label, (d, col) in runs.items():
         if (Path(d) / 'train.csv').exists():
             t = read_csv(Path(d) / 'train.csv')
             ax.plot(t['episode'], moving_average(t['reward'], 100), color=col, label=label)
-    ax.set(xlabel='Training episode', ylabel='Reward, 100-episode moving avg',
-           title='MsPacman-v5 ablation: target network vs. none')
+            ax2.plot(t['episode'], t['qmax_max'], color=col, lw=0.8, label=label)
+    ax.set(xlabel='Training episode', ylabel='Reward, 100-episode moving avg', title='Training reward')
     ax.legend(loc='upper left')
+    ax2.axhline(100, color=INK2, ls='--', lw=1)
+    ax2.text(4500, 104, r'bound $1/(1-\gamma)=100$ for clipped rewards', ha='right', color=INK2, fontsize=8)
+    ax2.set(xlabel='Training episode', ylabel='max Q over the episode', title='Max Q-value (per episode)',
+            ylim=(0, 240))
+    ax2.annotate('divergence spike right after\nlearning starts (no target)', xy=(60, 225), xytext=(700, 170),
+                 color=INK2, fontsize=8, arrowprops=dict(arrowstyle='->', color=INK2))
+    fig.suptitle('MsPacman-v5 ablation: target network vs. none (1 seed each)', fontweight='bold', fontsize=10)
     save(fig, out / 'mspacman_ablation.png')
 
 

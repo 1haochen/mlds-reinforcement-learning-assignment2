@@ -6,6 +6,9 @@ date: "November 11, 2026"
 geometry: margin=0.9in
 fontsize: 10pt
 colorlinks: true
+mainfont: "Times New Roman"
+mathfont: "STIX Two Math"
+monofont: "Menlo"
 header-includes:
   - \usepackage{float}
   - \floatplacement{figure}{H}
@@ -13,7 +16,7 @@ header-includes:
 
 # Submission information
 
-| | |
+| Item | Value |
 |---|---|
 | GitHub username | `1haochen` |
 | Repository | `mlds-reinforcement-learning-assignment2` |
@@ -25,15 +28,25 @@ header-includes:
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python validate.py analytic                        # T1-T3 analytic & pipeline tests (~15 s, CPU)
-GPU_MAIN=0 GPU_ABL=1 TIME=9000 bash run_all.sh                # all MsPacman + CartPole runs (1 GPU per MsPacman run)
-bash sweep_cartpole.sh                                       # CartPole hyper-parameter sweep A-E x 3 seeds
-.venv/bin/python dqn.py evaluate --checkpoint <run>/best.pt --episodes 500 [--workers 16]
-.venv/bin/python validate.py cartpole --checkpoint <cartpole best.pt>   # T4-T7
+# T1-T3 analytic & pipeline tests (~15 s, CPU)
+.venv/bin/python validate.py analytic
+# all MsPacman + CartPole runs (one GPU per MsPacman run), then the CartPole sweep A-F
+GPU_MAIN=0 GPU_ABL=1 TIME=9000 bash run_all.sh
+bash sweep_cartpole.sh
+# 500-episode greedy evaluation on held-out seeds 100000-100499
+.venv/bin/python dqn.py evaluate --checkpoint results/cartpole_s1/best.pt --episodes 500
+.venv/bin/python dqn.py evaluate --checkpoint results/mspacman/best.pt --episodes 500 \
+    --workers 20
+# behavioural tests T4-T8
+.venv/bin/python validate.py cartpole --checkpoint results/cartpole_s1/best.pt
 .venv/bin/python validate.py mspacman --checkpoint results/mspacman/best.pt
-.venv/bin/python plots.py --cartpole <cartpole run> --mspacman results/mspacman --out figures
+.venv/bin/python validate.py failure_modes --checkpoint results/cartpole_s{0,1,2}/best.pt \
+    results/cartpole_s{0,1,2}/last.pt
+# figures, then this report
+.venv/bin/python plots.py --cartpole results/cartpole_s1 --mspacman results/mspacman
+python3 build_report.py && pandoc report_full.md -o Assignment2_Report.pdf --pdf-engine=xelatex
 ```
 
-Each test's purpose and expected outcome is listed in `README.md` and in Section 4.
+Each test's purpose and expected outcome is listed in `README.md` and in Section 5.
 
 %%BODY%%

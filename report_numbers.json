@@ -1,0 +1,16 @@
+{
+ "M_Q": "10.9",
+ "M_G": "12.4",
+ "MSP_CORR": "0.76",
+ "M_QMAX": "29.4",
+ "N_Q": "15.5",
+ "N_G": "10.7",
+ "N_OVER": "45",
+ "N_QMAX": "228.4",
+ "NT_MEAN": "2,008.8",
+ "NT_STD": "499.5",
+ "MSP_QTHEORY": "The learned values stay far inside that bound for the main agent (largest Q seen in training: 29.4) and track the realised return (mean 10.9 predicted vs. 12.4 realised). The no-target agent broke the bound (228.4), a clear sign of divergence (Section 4).",
+ "MSP_ABL": "On MsPacman the no-target agent did not collapse, but it diverged right after learning started (Q above 220, past the hard bound of 100) and stayed about 45% over-optimistic. Its final score was higher (2,008.8 vs. 1,664.8) in this single-seed comparison, so the score difference is not conclusive (Section 4).",
+ "HEATMAP_TEXT": "The shifts are moderate, because many joystick actions are near-equivalent in a maze (e.g. UPRIGHT acts like UP or RIGHT depending on the corridor). From an almost uniform 11% each in episodes 0\u2013500, the policy moves to prefer UP (13.0%) and RIGHT (12.9%) and to avoid NOOP (8.9%) and LEFT (9.4%) by episodes 1,500\u20132,500. In the last 300 episodes DOWNRIGHT (13.6%) and UPRIGHT (12.5%) become the most used. Two checks follow from the plot. NOOP is never useful for scoring, and the agent learns to use it least. No row ever becomes solid dark, which would point to a degenerate policy that always picks one action (e.g. an argmax over an untrained or diverged network).",
+ "MSP_RANDOM": "233 \u00b1 54"
+}

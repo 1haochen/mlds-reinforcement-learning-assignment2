@@ -5,6 +5,14 @@ CartPole-v1 uses γ = 0.95, and MsPacman-v5 uses γ = 0.99 with the assignment's
 
 The full write-up with every figure and the discussion is in **`Assignment2_Report.pdf`**.
 
+## Results
+
+| | CartPole-v1 (γ = 0.95) | MsPacman-v5 (γ = 0.99) |
+|---|---|---|
+| Training | 600 episodes (main config, seed 1) | 4,614 episodes / 3.13M steps, 2.5 h on one RTX 2080 Ti |
+| 500 held-out greedy episodes | **497.3 ± 34.3** (99.4% reach 500, solved) | **1,664.8 ± 497.1** (random policy: 233) |
+| Checkpoint | `results/cartpole_s1/best.pt` | `results/mspacman/best.pt` |
+
 ## Files
 
 | File | Purpose |
@@ -13,10 +21,13 @@ The full write-up with every figure and the discussion is in **`Assignment2_Repo
 | `validate.py` | Validation experiments with expected outcomes: analytic chain MDP, terminal masking, pipeline edge cases, robustness / perturbation tests |
 | `plots.py` | Builds every figure in `figures/` from the logged CSV/JSON files |
 | `run_all.sh` | Launches the runs used in the report: MsPacman (main + no-target ablation, one GPU each) and CartPole (3 seeds × {main, no-double, no-target}) |
-| `sweep_cartpole.sh` | CartPole hyper-parameter sweep (configs A–C × 3 seeds) |
+| `sweep_cartpole.sh` | CartPole hyper-parameter sweep (configs A–F × 3 seeds) |
+| `summarize.py` | CartPole stability table across all runs |
+| `finalize.sh` | Post-training: 500-episode evaluations, behavioural tests, figures |
+| `build_report.py` | Fills every number in the report from the result files and writes `report_full.md` |
 | `results/` | Training logs (`train.csv`, `validation.jsonl`), configs, best checkpoints, 500-episode evaluations, validation JSON |
 | `figures/` | All report figures |
-| `report.md` | Report source (`pandoc report.md -o Assignment2_Report.pdf --pdf-engine=xelatex`) |
+| `report.md`, `report_body_*.md` | Report source: `python3 build_report.py && pandoc report_full.md -o Assignment2_Report.pdf --pdf-engine=xelatex` |
 
 ## How to run
 
@@ -35,15 +46,19 @@ bash sweep_cartpole.sh                            # CartPole hyper-parameter swe
 CUDA_VISIBLE_DEVICES=0 .venv/bin/python dqn.py train --game mspacman --out results/my_mp --device cuda --num-envs 8
 
 # 3) 500-episode evaluation of a checkpoint (held-out seeds 100000-100499, greedy policy)
-.venv/bin/python dqn.py evaluate --checkpoint results/sweep_A_s0/best.pt --episodes 500
-.venv/bin/python dqn.py evaluate --checkpoint results/mspacman/best.pt --episodes 500 --workers 16
+.venv/bin/python dqn.py evaluate --checkpoint results/cartpole_s1/best.pt --episodes 500
+.venv/bin/python dqn.py evaluate --checkpoint results/mspacman/best.pt --episodes 500 --workers 20
 
 # 4) Behavioural tests on the trained agents
-.venv/bin/python validate.py cartpole --checkpoint <cartpole best.pt>
+.venv/bin/python validate.py cartpole --checkpoint results/cartpole_s1/best.pt
 .venv/bin/python validate.py mspacman --checkpoint results/mspacman/best.pt
+.venv/bin/python validate.py failure_modes --checkpoint results/cartpole_s{0,1,2}/best.pt results/cartpole_s{0,1,2}/last.pt
 
 # 5) Figures
-.venv/bin/python plots.py --cartpole <cartpole run dir> --mspacman results/mspacman --out figures
+.venv/bin/python plots.py --cartpole results/cartpole_s1 --mspacman results/mspacman --out figures
+
+# 6) Report
+python3 build_report.py && pandoc report_full.md -o Assignment2_Report.pdf --pdf-engine=xelatex
 ```
 
 ## What each validation test checks

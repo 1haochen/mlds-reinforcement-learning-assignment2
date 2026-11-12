@@ -1,0 +1,15 @@
+{
+  "checkpoint": "results/mspacman_notarget/best.pt",
+  "checkpoint_episode": 4500,
+  "n": 500,
+  "mean": 2008.84,
+  "std": 499.49779829444896,
+  "min": 1310.0,
+  "max": 3280.0,
+  "median": 1710.0,
+  "epsilon": 0.0,
+  "seeds": [
+    100000,
+    100499
+  ]
+}
