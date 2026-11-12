@@ -10,7 +10,6 @@ __pycache__/
 .env
 results/**/last.pt
 old_attempt/
-report_body_*.md
 *.pid
 report_full.md
 logs/
